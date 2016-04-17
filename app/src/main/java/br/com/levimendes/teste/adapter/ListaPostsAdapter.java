@@ -11,15 +11,15 @@ import java.util.List;
 
 import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.Post;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Levi on 16/04/2016.
  */
 public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.ViewHolder> {
 
-
-    List<Post> mListaPosts;
-
+    private List<Post> mListaPosts;
 
     public ListaPostsAdapter(ArrayList<Post> listaPosts) {
         mListaPosts = listaPosts;
@@ -28,15 +28,8 @@ public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_post, parent, false);
-        final ViewHolder vh = new ViewHolder(v);
 
-        vh.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        return vh;
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -56,17 +49,14 @@ public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public EditText etTitulo;
-        public EditText etData;
-        public EditText etMensagem;
+        @Bind(R.id.etTitulo)   EditText etTitulo;
+        @Bind(R.id.etData)     EditText etData;
+        @Bind(R.id.etMensagem) EditText etMensagem;
 
         public ViewHolder(View v) {
             super(v);
 
-            etTitulo   = (EditText)v.findViewById(R.id.etTitulo);
-            etData     = (EditText)v.findViewById(R.id.etData);
-            etMensagem = (EditText)v.findViewById(R.id.etMensagem);
+            ButterKnife.bind(this, v);
         }
     }
-
 }
