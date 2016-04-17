@@ -3,33 +3,34 @@ package br.com.levimendes.teste;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
+import java.util.Arrays;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.MainActivityPresenter;
 import br.com.levimendes.teste.mvp.MainActivityView;
 import br.com.levimendes.teste.util.ToastUtil;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     CallbackManager callbackManager;
-
     MainActivityPresenter presenter;
+    @Bind(R.id.login_button) LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends", "public_profile", "user_posts", "email");
+        loginButton.setReadPermissions(Arrays.asList("user_friends", "public_profile", "user_posts", "email"));
+        callbackManager = CallbackManager.Factory.create();
 
         presenter = new MainActivityPresenter(this);
 
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @Override
     public void showSnack(View view, int idMsg) {
         //SnackUtil.showSnackShort(, );
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     @Override

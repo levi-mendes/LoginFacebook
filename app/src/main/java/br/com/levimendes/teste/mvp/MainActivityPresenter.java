@@ -50,42 +50,14 @@ public class MainActivityPresenter {
                         }
                     }
                 });
-                //Bundle bundle = new Bundle();
-                //graphRequest.setParameters();
+                //Bundle parameters = new Bundle();
+                //parameters.putString("fields", "id,name,email,gender,birthday");
+                //graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
-
-                /*
-                // App code
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.e("LoginActivity", response.toString());
-
-                                // Application code
-                                try {
-                                    //String publish_actions = object.getString("publish_actions");
-                                    //Log.e("publish_actions", publish_actions);
-                                    String user_friends = object.getString("user_friends");
-                                    String public_profile = object.getString("public_profile"); // 01/31/1980 format
-                                    Log.e("onCompleted", "user_friends: " + user_friends + "\npublic_profile: " + public_profile);
-
-                                } catch (JSONException e) {
-                                    Log.e("onCompleted", e.getMessage(), e);
-                                }
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();*/
             }
 
             @Override
-            public void onCancel() {
-                Log.e("onCancel", "Operação cancelada");
-            }
+            public void onCancel() {}
 
             @Override
             public void onError(FacebookException exception) {

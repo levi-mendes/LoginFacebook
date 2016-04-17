@@ -1,7 +1,6 @@
 package br.com.levimendes.teste;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +15,7 @@ import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.TimelineActivityPresenter;
 import br.com.levimendes.teste.mvp.TimelineActivityView;
+import br.com.levimendes.teste.util.SnackUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,7 +43,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
 
     @OnClick(R.id.fab)
     void fab(View view) {
-        showSnack(view, R.string.adicionar_um_post_na_linha_do_tempo);
+        SnackUtil.showSnackShort(view, getString(R.string.adicionar_um_post_na_linha_do_tempo));
     }
 
     private void configurarDrawer() {
@@ -93,9 +93,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
     }
 
     @Override
-    public void showSnack(View view, int idMsg) {
-
-    }
+    public void showSnack(View view, int idMsg) {}
 
     @Override
     public void showToast(int idMsg) {
