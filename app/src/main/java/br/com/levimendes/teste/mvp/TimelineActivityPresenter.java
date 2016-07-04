@@ -5,17 +5,24 @@ package br.com.levimendes.teste.mvp;
  */
 public class TimelineActivityPresenter {
 
-    private TimelineActivityView mTimelineActivityView;
+    private TimelineActivityView mView;
 
     public TimelineActivityPresenter(TimelineActivityView timelineActivityView) {
-        mTimelineActivityView = timelineActivityView;
+        mView = timelineActivityView;
     }
 
     public void onBackPressed() {
-        if (mTimelineActivityView.drawerIsOpen()) {
-            mTimelineActivityView.closeDrawer();
-        } else {
-            mTimelineActivityView.backPressed();
+        if (mView.drawerIsOpen()) {
+            mView.closeDrawer();
+            return;
         }
+
+        mView.backPressed();
+    }
+
+    public void init() {
+        mView.configurarDrawer();
+        mView.configurarRecyclerView();
+        mView.preencherLista();
     }
 }

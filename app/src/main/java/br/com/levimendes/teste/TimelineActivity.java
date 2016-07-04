@@ -24,9 +24,12 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
 
     private TimelineActivityPresenter presenter;
 
-    @Bind(R.id.rvPosts) RecyclerView rvPosts;
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.drawer)  DrawerLayout drawer;
+    @Bind(R.id.rvPosts)
+    RecyclerView rvPosts;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.drawer)
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
 
         setSupportActionBar(toolbar);
         presenter = new TimelineActivityPresenter(this);
-
-        configurarDrawer();
-        configurarRecyclerView();
+        presenter.init();
     }
 
     @OnClick(R.id.fab)
@@ -46,22 +47,26 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
         SnackUtil.showSnackShort(view, getString(R.string.adicionar_um_post_na_linha_do_tempo));
     }
 
-    private void configurarDrawer() {
+    @Override
+    public void configurarDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
 
-    private void configurarRecyclerView() {
+    @Override
+    public void configurarRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         rvPosts.setLayoutManager(layoutManager);
         rvPosts.setItemAnimator(new DefaultItemAnimator());
         rvPosts.setHasFixedSize(true);
+    }
 
+    @Override
+    public void preencherLista() {
         ArrayList<Post> posts = (ArrayList<Post>) getIntent().getSerializableExtra("posts");
-
         ListaPostsAdapter adapter = new ListaPostsAdapter(posts);
         rvPosts.setAdapter(adapter);
     }
