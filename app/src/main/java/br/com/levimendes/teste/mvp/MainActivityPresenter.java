@@ -24,35 +24,34 @@ public class MainActivityPresenter {
 
     public MainActivityPresenter(MainActivityView mainActivityView) {
         mMainActivityView = mainActivityView;
+
     }
 
     public FacebookCallback<LoginResult> facebookCallbackLogin() {
         FacebookCallback<LoginResult> retorno = new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                /* make the API call */ //locale=br_BR
-                GraphRequest graphRequest = new GraphRequest(AccessToken.getCurrentAccessToken(), "me/feed", null, HttpMethod.GET, new GraphRequest.Callback() {
+            public void onSuccess(final LoginResult loginResult) {
 
-                    public void onCompleted(GraphResponse response) {
-                        /* handle the result */
-                        if (response != null) {
+                //busca timeline
+                GraphRequest graphRequest = new GraphRequest(AccessToken.getCurrentAccessToken(), "me/feed", null, HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                /* handle the result */
+                                if (response != null) {
 
-                            try {
-                                JSONArray jsonObject = response.getJSONObject().getJSONArray("data");
+                                    try {
+                                        JSONArray jsonObject = response.getJSONObject().getJSONArray("data");
 
-                                Gson gson = new Gson();
-                                ArrayList<Post> posts = gson.fromJson(jsonObject.toString(), new TypeToken<ArrayList<Post>>(){}.getType());
-                                mMainActivityView.launchTimelineActivity(posts);
+                                        Gson gson = new Gson();
+                                        ArrayList<Post> posts = gson.fromJson(jsonObject.toString(), new TypeToken<ArrayList<Post>>(){}.getType());
+                                        mMainActivityView.launchTimelineActivity(posts, loginResult.getAccessToken());
 
-                            } catch (JSONException e) {
-                                Log.e("onCompleted", e.getMessage(), e);
+                                    } catch (JSONException e) {
+                                        Log.e("onCompleted", e.getMessage(), e);
+                                    }
+                                }
                             }
-                        }
-                    }
-                });
-                //Bundle parameters = new Bundle();
-                //parameters.putString("fields", "id,name,email,gender,birthday");
-                //graphRequest.setParameters(parameters);
+                    });
                 graphRequest.executeAsync();
             }
 

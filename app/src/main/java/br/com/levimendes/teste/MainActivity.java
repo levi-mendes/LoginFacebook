@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
@@ -61,9 +63,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
-    public void launchTimelineActivity(ArrayList<Post> posts) {
+    public void launchTimelineActivity(ArrayList<Post> posts, AccessToken token) {
         Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
         intent.putExtra("posts", posts);
+        intent.putExtra("token", token);
         startActivity(intent);
     }
 }

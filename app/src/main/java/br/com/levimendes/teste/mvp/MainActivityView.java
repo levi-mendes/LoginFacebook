@@ -1,5 +1,7 @@
 package br.com.levimendes.teste.mvp;
 
+import com.facebook.AccessToken;
+
 import java.util.ArrayList;
 import br.com.levimendes.teste.bean.Post;
 
@@ -8,5 +10,5 @@ import br.com.levimendes.teste.bean.Post;
  */
 public interface MainActivityView extends BasicView {
 
-    void launchTimelineActivity(ArrayList<Post> posts);
+    void launchTimelineActivity(ArrayList<Post> posts, AccessToken token);
 }
