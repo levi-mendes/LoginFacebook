@@ -20,18 +20,17 @@ import br.com.levimendes.teste.bean.Post;
  */
 public class MainActivityPresenter {
 
-    private MainActivityView mMainActivityView;
+    private MainActivityView mView;
 
     public MainActivityPresenter(MainActivityView mainActivityView) {
-        mMainActivityView = mainActivityView;
-
+        mView = mainActivityView;
     }
 
     public FacebookCallback<LoginResult> facebookCallbackLogin() {
         FacebookCallback<LoginResult> retorno = new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(final LoginResult loginResult) {
-
+                //TODO criar deserializer para formatar o código
                 //busca timeline
                 GraphRequest graphRequest = new GraphRequest(AccessToken.getCurrentAccessToken(), "me/feed", null, HttpMethod.GET,
                         new GraphRequest.Callback() {
@@ -44,10 +43,11 @@ public class MainActivityPresenter {
 
                                         Gson gson = new Gson();
                                         ArrayList<Post> posts = gson.fromJson(jsonObject.toString(), new TypeToken<ArrayList<Post>>(){}.getType());
-                                        mMainActivityView.launchTimelineActivity(posts, loginResult.getAccessToken());
+                                        mView.launchTimelineActivity(posts, loginResult.getAccessToken());
 
                                     } catch (JSONException e) {
                                         Log.e("onCompleted", e.getMessage(), e);
+                                        mView.showToast(e.getMessage());
                                     }
                                 }
                             }

@@ -10,4 +10,5 @@ public class User implements Serializable {
     public String nome;
     public String email;
     public String urlPicture;
+    public String dataNascimento;
 }

@@ -14,11 +14,13 @@ import java.util.Arrays;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.MainActivityPresenter;
 import br.com.levimendes.teste.mvp.MainActivityView;
+import br.com.levimendes.teste.util.BaseActivity;
+import br.com.levimendes.teste.util.SnackUtil;
 import br.com.levimendes.teste.util.ToastUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView {
+public class MainActivity extends BaseActivity implements MainActivityView {
 
     CallbackManager callbackManager;
     MainActivityPresenter presenter;
@@ -31,9 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        loginButton.setReadPermissions(Arrays.asList("user_friends", "public_profile", "user_posts", "email"));
         callbackManager = CallbackManager.Factory.create();
-
         presenter = new MainActivityPresenter(this);
 
         // Callback registration
@@ -47,19 +47,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
-    public void showSnack(View view, int idMsg) {
-        //SnackUtil.showSnackShort(, );
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void showToast(int idMsg) {
-        ToastUtil.showShort(this, getString(idMsg));
     }
 
     @Override
@@ -68,5 +58,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         intent.putExtra("posts", posts);
         intent.putExtra("token", token);
         startActivity(intent);
+    }
+
+    @Override
+    public void showSnack(View view, int idMsg) {
+        SnackUtil.showSnackLong(getCurrentFocus(), getString(idMsg));
+    }
+
+    @Override
+    public void showToast(int idMsg) {
+        ToastUtil.showLong(this, getString(idMsg));
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtil.showLong(this, msg);
     }
 }

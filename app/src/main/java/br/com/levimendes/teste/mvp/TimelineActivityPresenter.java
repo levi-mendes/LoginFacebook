@@ -67,6 +67,7 @@ public class TimelineActivityPresenter {
     }
 
     private User getFacebookData(JSONObject object) {
+        //TODO refatorar codigo - Levi Mendes
         User retorno = new User();
 
         try {
@@ -74,7 +75,7 @@ public class TimelineActivityPresenter {
             String id = object.getString("id");
 
             try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
+                URL profile_pic = new URL(String.format("https://graph.facebook.com/%s/picture?type=large", id));
                 retorno.urlPicture = profile_pic.toString();
 
             } catch (MalformedURLException e) {
@@ -104,7 +105,7 @@ public class TimelineActivityPresenter {
 
 
             if (object.has("birthday"))
-                bundle.putString("birthday", object.getString("birthday"));
+                retorno.dataNascimento = object.getString("birthday");
 
 
             if (object.has("location"))

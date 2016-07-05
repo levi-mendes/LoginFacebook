@@ -24,12 +24,14 @@ import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.bean.User;
 import br.com.levimendes.teste.mvp.TimelineActivityPresenter;
 import br.com.levimendes.teste.mvp.TimelineActivityView;
+import br.com.levimendes.teste.util.BaseActivity;
 import br.com.levimendes.teste.util.SnackUtil;
+import br.com.levimendes.teste.util.ToastUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TimelineActivity extends AppCompatActivity implements TimelineActivityView,
+public class TimelineActivity extends BaseActivity implements TimelineActivityView,
         NavigationView.OnNavigationItemSelectedListener {
 
     private TimelineActivityPresenter presenter;
@@ -158,13 +160,22 @@ public class TimelineActivity extends AppCompatActivity implements TimelineActiv
         return drawer.isDrawerOpen(GravityCompat.START);
     }
 
+
     @Override
-    public void showSnack(View view, int idMsg) {}
+    public void showSnack(View view, int idMsg) {
+        SnackUtil.showSnackLong(getCurrentFocus(), getString(idMsg));
+    }
 
     @Override
     public void showToast(int idMsg) {
-
+        ToastUtil.showLong(this, getString(idMsg));
     }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtil.showLong(this, msg);
+    }
+
 
     @Override
     public void backPressed() {
