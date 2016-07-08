@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
-import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
@@ -84,11 +84,7 @@ public class TimelineActivity extends BaseActivity implements TimelineActivityVi
 
         tvNome.setText(user.nome);
 
-        Picasso.with(this)
-                .load(user.urlPicture)
-                //.placeholder(R.drawable.user_placeholder)
-                //.error(R.drawable.user_placeholder_error)
-                .into(imageView);
+        Glide.with(this).load(user.urlPicture).into(imageView);
     }
 
     @Override
