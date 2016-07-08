@@ -1,5 +1,6 @@
 package br.com.levimendes.teste.mvp;
 
+import android.support.annotation.StringRes;
 import android.view.View;
 
 /**
@@ -7,7 +8,7 @@ import android.view.View;
  */
 public interface BasicView {
     //teste
-    void showSnack(View view, int idMsg);
-    void showToast(int idMsg);
+    void showSnack(View view, @StringRes int idMsg);
+    void showToast(@StringRes int idMsg);
     void showToast(String msg);
 }
