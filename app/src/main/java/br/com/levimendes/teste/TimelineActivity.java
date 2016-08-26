@@ -1,15 +1,16 @@
 package br.com.levimendes.teste;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,33 +19,38 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+
 import java.util.ArrayList;
+
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.bean.User;
-import br.com.levimendes.teste.mvp.TimelineActivityPresenter;
-import br.com.levimendes.teste.mvp.TimelineActivityView;
+import br.com.levimendes.teste.mvp.presenter.TimelineActivityPresenter;
+import br.com.levimendes.teste.mvp.contracts.TimelineActivityView;
 import br.com.levimendes.teste.util.BaseActivity;
 import br.com.levimendes.teste.util.SnackUtil;
 import br.com.levimendes.teste.util.ToastUtil;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TimelineActivity extends BaseActivity implements TimelineActivityView,
+public class TimelineActivity extends BaseActivity implements TimelineActivityView.View,
         NavigationView.OnNavigationItemSelectedListener {
 
     private TimelineActivityPresenter presenter;
 
-    @Bind(R.id.rvPosts)
+    @BindView(R.id.rvPosts)
     RecyclerView rvPosts;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.drawer)
+    @BindView(R.id.drawer)
     DrawerLayout drawer;
-    @Bind(R.id.nav_view)
+    @BindView(R.id.nav_view)
     NavigationView nav_view;
-    @Bind(R.id.pbProcessamento)
+    @BindView(R.id.pbProcessamento)
     ProgressBar pbProcessamento;
 
     @Override
@@ -66,9 +72,19 @@ public class TimelineActivity extends BaseActivity implements TimelineActivityVi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        //vistoriaActivityPresenter.navigate(id);
+        presenter.menuNavigation(id);
 
         return true;
+    }
+
+    @Override
+    public void callTelaAmigos() {
+        startActivity(new Intent(this, FriendsTaggableActivity.class));
+    }
+
+    @Override
+    public void finalizar() {
+        finish();
     }
 
     @Override
@@ -128,12 +144,6 @@ public class TimelineActivity extends BaseActivity implements TimelineActivityVi
     public void preencherLista(ArrayList<Post> posts) {
         ListaPostsAdapter adapter = new ListaPostsAdapter(posts);
         rvPosts.setAdapter(adapter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
     @Override

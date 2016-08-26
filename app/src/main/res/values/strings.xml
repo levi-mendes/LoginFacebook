@@ -10,4 +10,7 @@
     <string name="titulo">Título</string>
     <string name="data">Data:</string>
     <string name="mesagem">Mensagem</string>
+    <string name="sair">Sair</string>
+    <string name="amigos">Amigos</string>
+    <string name="bate_papo">Bate papo</string>
 </resources>

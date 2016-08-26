@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.Post;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,7 +24,7 @@ public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.Vi
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_post, parent, false);
 
         return new ViewHolder(v);
@@ -49,9 +47,9 @@ public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.etTitulo)   EditText etTitulo;
-        @Bind(R.id.etData)     EditText etData;
-        @Bind(R.id.etMensagem) EditText etMensagem;
+        @BindView(R.id.etTitulo)   EditText etTitulo;
+        @BindView(R.id.etData)     EditText etData;
+        @BindView(R.id.etMensagem) EditText etMensagem;
 
         public ViewHolder(View v) {
             super(v);

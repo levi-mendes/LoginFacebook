@@ -1,7 +1,6 @@
-package br.com.levimendes.teste.mvp;
+package br.com.levimendes.teste.mvp.contracts;
 
 import com.facebook.AccessToken;
-
 import java.util.ArrayList;
 import br.com.levimendes.teste.bean.Post;
 

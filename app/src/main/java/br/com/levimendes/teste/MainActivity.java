@@ -1,30 +1,27 @@
 package br.com.levimendes.teste;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
-import java.util.Arrays;
 import br.com.levimendes.teste.bean.Post;
-import br.com.levimendes.teste.mvp.MainActivityPresenter;
-import br.com.levimendes.teste.mvp.MainActivityView;
+import br.com.levimendes.teste.mvp.presenter.MainActivityPresenter;
+import br.com.levimendes.teste.mvp.contracts.MainActivityView;
 import br.com.levimendes.teste.util.BaseActivity;
 import br.com.levimendes.teste.util.SnackUtil;
 import br.com.levimendes.teste.util.ToastUtil;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainActivityView {
 
     CallbackManager callbackManager;
     MainActivityPresenter presenter;
-    @Bind(R.id.login_button) LoginButton loginButton;
+    @BindView(R.id.login_button) LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +41,6 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
     @Override

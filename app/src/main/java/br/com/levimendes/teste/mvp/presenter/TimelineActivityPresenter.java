@@ -1,32 +1,31 @@
-package br.com.levimendes.teste.mvp;
+package br.com.levimendes.teste.mvp.presenter;
 
 import android.os.Bundle;
 import android.util.Log;
-
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginResult;
-
+import com.facebook.login.LoginManager;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.User;
+import br.com.levimendes.teste.mvp.contracts.TimelineActivityView;
 
 /**
  * Created by Levi on 17/04/2016.
  */
-public class TimelineActivityPresenter {
+public class TimelineActivityPresenter implements TimelineActivityView.UserActions {
 
-    private TimelineActivityView mView;
+    private TimelineActivityView.View mView;
 
-    public TimelineActivityPresenter(TimelineActivityView timelineActivityView) {
+    public TimelineActivityPresenter(TimelineActivityView.View timelineActivityView) {
         mView = timelineActivityView;
     }
 
+    @Override
     public void onBackPressed() {
         if (mView.drawerIsOpen()) {
             mView.closeDrawer();
@@ -36,15 +35,31 @@ public class TimelineActivityPresenter {
         mView.backPressed();
     }
 
+    @Override
+    public void menuNavigation(int idItem) {
+        switch (idItem) {
+            case R.id.itemSair:
+                sair();
+                break;
+
+            case R.id.itemAmigos:
+                mView.callTelaAmigos();
+                break;
+        }
+    }
+
+    @Override
     public void init() {
         mView.configurarDrawer();
         mView.configurarRecyclerView();
         mView.preencherLista(mView.posts());
 
-        //User user = new User();
-        //user.urlPicture = "https://graph.facebook.com/225338341159495/picture?type=large";
-
         printDados(mView.tokenAcesso());
+    }
+
+    private void sair() {
+        LoginManager.getInstance().logOut();
+        mView.finalizar();
     }
 
     private void printDados(AccessToken accessToken) {
