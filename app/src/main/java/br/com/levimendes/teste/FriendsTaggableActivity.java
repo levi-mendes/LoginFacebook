@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import br.com.levimendes.teste.adapter.ListaFriendsAdapter;
+import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.mvp.contracts.FriendsTaggableMVP;
 import br.com.levimendes.teste.mvp.presenter.FriendsTaggaglePresenter;
 import butterknife.BindView;

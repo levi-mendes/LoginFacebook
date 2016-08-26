@@ -9,7 +9,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
 import br.com.levimendes.teste.bean.Post;
-import br.com.levimendes.teste.mvp.presenter.MainActivityPresenter;
+import br.com.levimendes.teste.mvp.presenter.MainPresenter;
 import br.com.levimendes.teste.mvp.contracts.MainActivityView;
 import br.com.levimendes.teste.util.BaseActivity;
 import br.com.levimendes.teste.util.SnackUtil;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements MainActivityView {
 
     CallbackManager callbackManager;
-    MainActivityPresenter presenter;
+    MainPresenter presenter;
     @BindView(R.id.login_button) LoginButton loginButton;
 
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity implements MainActivityView {
         ButterKnife.bind(this);
 
         callbackManager = CallbackManager.Factory.create();
-        presenter = new MainActivityPresenter(this);
+        presenter = new MainPresenter(this);
 
         // Callback registration
         loginButton.registerCallback(callbackManager, presenter.facebookCallbackLogin());

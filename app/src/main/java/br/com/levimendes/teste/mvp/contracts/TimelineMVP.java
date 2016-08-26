@@ -8,7 +8,7 @@ import br.com.levimendes.teste.bean.User;
 /**
  * Created by Levi on 17/04/2016.
  */
-public interface TimelineActivityView {
+public interface TimelineMVP {
 
     interface View extends BasicView {
         boolean drawerIsOpen();
@@ -27,7 +27,7 @@ public interface TimelineActivityView {
         void callTelaAmigos();
     }
 
-    interface UserActions {
+    interface Presenter {
         void onBackPressed();
         void init();
         void menuNavigation(int idItem);

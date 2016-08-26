@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,17 +11,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.User;
-import br.com.levimendes.teste.mvp.contracts.TimelineActivityView;
+import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
 
 /**
  * Created by Levi on 17/04/2016.
  */
-public class TimelineActivityPresenter implements TimelineActivityView.UserActions {
+public class TimelinePresenter implements TimelineMVP.Presenter {
 
-    private TimelineActivityView.View mView;
+    private TimelineMVP.View mView;
 
-    public TimelineActivityPresenter(TimelineActivityView.View timelineActivityView) {
-        mView = timelineActivityView;
+    public TimelinePresenter(TimelineMVP.View view) {
+        mView = view;
     }
 
     @Override
@@ -62,23 +61,34 @@ public class TimelineActivityPresenter implements TimelineActivityView.UserActio
         mView.finalizar();
     }
 
-    private void printDados(AccessToken accessToken) {
-        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+    private GraphRequest.GraphJSONObjectCallback callback() {
+        return (object, response) -> {
+            // Get facebook data from login
+            User user = getFacebookData(object);
+            mView.carregarDados(user);
+        };
+    }
 
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                Log.e("LoginActivity", response.toString());
-                // Get facebook data from login
-                User user = getFacebookData(object);
-                mView.carregarDados(user);
-            }
-        });
+    private void printDados(AccessToken accessToken) {
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, callback());
 
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location"); // Parámetros que pedimos a facebook
         request.setParameters(parameters);
         request.executeAsync();
 
+    }
+
+    private String urlPicture(String id) {
+        try {
+            URL profilePic = new URL(String.format("https://graph.facebook.com/%s/urlPicture?type=large", id));
+            return profilePic.toString();
+
+        } catch (MalformedURLException e) {
+            Log.e("error", e.getMessage(), e);
+        }
+
+        return null;
     }
 
     private User getFacebookData(JSONObject object) {
@@ -89,16 +99,10 @@ public class TimelineActivityPresenter implements TimelineActivityView.UserActio
             Bundle bundle = new Bundle();
             String id = object.getString("id");
 
-            try {
-                URL profile_pic = new URL(String.format("https://graph.facebook.com/%s/picture?type=large", id));
-                retorno.urlPicture = profile_pic.toString();
-
-            } catch (MalformedURLException e) {
-                Log.e("error", e.getMessage(), e);
-                //return null;
-            }
+            retorno.urlPicture = urlPicture(id);
 
             bundle.putString("idFacebook", id);
+
             if (object.has("first_name")) {
                 bundle.putString("first_name", object.getString("first_name"));
                 retorno.nome = object.getString("first_name");

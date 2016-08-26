@@ -22,11 +22,11 @@ import br.com.levimendes.teste.mvp.contracts.MainActivityView;
 /**
  * Created by Levi on 16/04/2016.
  */
-public class MainActivityPresenter {
+public class MainPresenter {
 
     private MainActivityView mView;
 
-    public MainActivityPresenter(MainActivityView view) {
+    public MainPresenter(MainActivityView view) {
         mView = view;
     }
 

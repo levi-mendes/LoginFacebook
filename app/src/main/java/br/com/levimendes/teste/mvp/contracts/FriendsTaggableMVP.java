@@ -2,7 +2,7 @@ package br.com.levimendes.teste.mvp.contracts;
 
 import java.util.List;
 
-import br.com.levimendes.teste.Friend;
+import br.com.levimendes.teste.bean.Friend;
 
 /**
  * Created by 809778 on 11/07/2016.
@@ -15,7 +15,7 @@ public interface FriendsTaggableMVP {
         void carregarLista(List<Friend> friends);
     }
 
-    interface UserActions {
+    interface Presenter {
         void init();
     }
 }

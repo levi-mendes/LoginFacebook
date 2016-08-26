@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
-import br.com.levimendes.teste.Friend;
+import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +43,7 @@ public class ListaFriendsAdapter extends RecyclerView.Adapter<ListaFriendsAdapte
         holder.tvName.setText(friend.name);
 
         Glide.with(holder.itemView.getContext())
-              .load(friend.picture)
+              .load(friend.urlPicture)
               .into(holder.ivPicture);
     }
 

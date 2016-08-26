@@ -10,26 +10,19 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-
 import java.util.ArrayList;
-
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.bean.User;
-import br.com.levimendes.teste.mvp.presenter.TimelineActivityPresenter;
-import br.com.levimendes.teste.mvp.contracts.TimelineActivityView;
+import br.com.levimendes.teste.mvp.presenter.TimelinePresenter;
+import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
 import br.com.levimendes.teste.util.BaseActivity;
 import br.com.levimendes.teste.util.SnackUtil;
 import br.com.levimendes.teste.util.ToastUtil;
@@ -37,10 +30,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TimelineActivity extends BaseActivity implements TimelineActivityView.View,
+public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         NavigationView.OnNavigationItemSelectedListener {
 
-    private TimelineActivityPresenter presenter;
+    private TimelinePresenter presenter;
 
     @BindView(R.id.rvPosts)
     RecyclerView rvPosts;
@@ -62,7 +55,7 @@ public class TimelineActivity extends BaseActivity implements TimelineActivityVi
         nav_view.setNavigationItemSelectedListener(this);
 
         setSupportActionBar(toolbar);
-        presenter = new TimelineActivityPresenter(this);
+        presenter = new TimelinePresenter(this);
         presenter.init();
     }
 
@@ -100,7 +93,9 @@ public class TimelineActivity extends BaseActivity implements TimelineActivityVi
 
         tvNome.setText(user.nome);
 
-        Glide.with(this).load(user.urlPicture).into(imageView);
+        Glide.with(this)
+             .load(user.urlPicture)
+             .into(imageView);
     }
 
     @Override

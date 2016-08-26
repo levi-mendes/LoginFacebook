@@ -1,37 +1,56 @@
 package br.com.levimendes.teste.deserializer;
 
-import com.google.gson.Gson;
+import android.util.Log;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import java.lang.reflect.Type;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import br.com.levimendes.teste.Friend;
+import br.com.levimendes.teste.bean.Friend;
 
 /**
  * Created by Levi on 06/11/2015.
  */
-public class FriendsDeserializer implements JsonDeserializer<Object> {
+public class FriendsDeserializer {
 
-    @Override
-    public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public List<Friend> deserialize(JsonElement json) {
         List<Friend> retorno = new ArrayList<>();
 
-        //retorna todos os objetos
-        JsonElement j = json.getAsJsonObject().get("avfms");
-        //joga todos os objetos em um array
-        JsonArray array = j.getAsJsonArray();
+        JsonObject root = json.getAsJsonObject();
+        JsonArray array = root.getAsJsonArray("data");
 
-        if (array != null && array.size() > 0) {
+        for (int cont = 0; cont < array.size(); cont++) {
+            JsonElement jsonElement = array.get(cont);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            for (int cont = 0; cont < array.size(); cont++) {
-                retorno.add(new Gson().fromJson(array.get(cont), Friend.class));
-            }
+            String id             = jsonObject.get("id").toString().replaceAll("\"", "");
+            String name           = jsonObject.get("name").toString().replaceAll("\"", "");
+            String urlPicture     = urlPicture(jsonObject);
+
+            Friend friend = new Friend();
+
+            friend.id         = id;
+            friend.name       = name;
+            friend.urlPicture = urlPicture;
+
+            retorno.add(friend);
         }
 
         return retorno;
+    }
+
+    private String urlPicture(JsonObject jsonObject) {
+        try {
+            JsonObject objPicture =  jsonObject.getAsJsonObject("picture");
+            JsonObject objData    = objPicture.getAsJsonObject("data");
+            String urlPicture     = objData.get("url").toString().replaceAll("\"", "");
+
+            return urlPicture;
+
+        } catch (Exception e) {
+            Log.e("urlPicture", e.getMessage(), e);
+        }
+
+        return null;
     }
 }
