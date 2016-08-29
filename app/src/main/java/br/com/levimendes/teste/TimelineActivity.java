@@ -96,7 +96,7 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         Glide.with(this)
              .load(user.urlPicture)
              .into(imageView);
-    }
+    }//  Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
 
     @Override
     public void hideProcessamento() {

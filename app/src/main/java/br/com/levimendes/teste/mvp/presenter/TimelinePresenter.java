@@ -81,7 +81,7 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
 
     private String urlPicture(String id) {
         try {
-            URL profilePic = new URL(String.format("https://graph.facebook.com/%s/urlPicture?type=large", id));
+            URL profilePic = new URL(String.format("https://graph.facebook.com/%s/picture?type=large", id));
             return profilePic.toString();
 
         } catch (MalformedURLException e) {
@@ -92,7 +92,7 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
     }
 
     private User getFacebookData(JSONObject object) {
-        //TODO refatorar codigo - Levi Mendes
+        //TODO refatorar codigo - Levi Mendes  USAR CLASSE  Gson
         User retorno = new User();
 
         try {

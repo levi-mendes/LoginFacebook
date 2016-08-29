@@ -1,6 +1,8 @@
 package br.com.levimendes.teste.deserializer;
 
 import android.util.Log;
+
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,10 +15,12 @@ import br.com.levimendes.teste.bean.Friend;
  */
 public class FriendsDeserializer {
 
-    public List<Friend> deserialize(JsonElement json) {
+    public List<Friend> deserialize(String content) {
+        Gson gson = new Gson();
+        JsonElement jsonElementRoot = gson.fromJson(content, JsonElement.class);
         List<Friend> retorno = new ArrayList<>();
 
-        JsonObject root = json.getAsJsonObject();
+        JsonObject root = jsonElementRoot.getAsJsonObject();
         JsonArray array = root.getAsJsonArray("data");
 
         for (int cont = 0; cont < array.size(); cont++) {

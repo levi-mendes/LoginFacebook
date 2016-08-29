@@ -1,14 +1,11 @@
 package br.com.levimendes.teste.mvp.presenter;
 
-import android.util.Log;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import java.util.List;
-
 import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.deserializer.FriendsDeserializer;
 import br.com.levimendes.teste.mvp.contracts.FriendsTaggableMVP;
@@ -18,7 +15,7 @@ import br.com.levimendes.teste.mvp.contracts.FriendsTaggableMVP;
  */
 public class FriendsTaggaglePresenter implements FriendsTaggableMVP.Presenter {
 
-    FriendsTaggableMVP.View mView;
+    private FriendsTaggableMVP.View mView;
     private static final String TAGGABLE_FRIENDS = "/me/taggable_friends";
 
     public FriendsTaggaglePresenter(FriendsTaggableMVP.View view) {
@@ -33,22 +30,28 @@ public class FriendsTaggaglePresenter implements FriendsTaggableMVP.Presenter {
                 TAGGABLE_FRIENDS, null, HttpMethod.GET, callback());
 
         graphRequest.executeAsync();
+        //graphRequest();
     }
+
+    /*
+    private void graphRequest() {
+        GraphRequest graphRequest = new GraphRequest();
+
+        graphRequest.setAccessToken(AccessToken.getCurrentAccessToken());
+        graphRequest.setGraphPath(TAGGABLE_FRIENDS);
+        graphRequest.setParameters(null);
+        graphRequest.setHttpMethod(HttpMethod.GET);
+        graphRequest.setCallback(callback());
+
+        graphRequest.executeAsync();
+    }
+    */
 
     private GraphRequest.Callback callback() {
         return response -> {
-            Log.e("getFriendsDat",""+ response);
-
-            String res      = response.getRawResponse();
-
             FriendsDeserializer deserializer = new FriendsDeserializer();
 
-            Gson gson = new Gson();
-            JsonElement jsonElement = gson.fromJson(res, JsonElement.class);
-
-            List<Friend> friends = deserializer.deserialize(jsonElement);
-
-            Log.e("onCompleted", res);
+            List<Friend> friends = deserializer.deserialize(response.getRawResponse());
 
             mView.carregarLista(friends);
             mView.hideProgress();
