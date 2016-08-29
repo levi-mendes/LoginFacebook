@@ -1,7 +1,6 @@
 package br.com.levimendes.teste.deserializer;
 
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -27,8 +26,8 @@ public class FriendsDeserializer {
             JsonElement jsonElement = array.get(cont);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            String id             = jsonObject.get("id").toString().replaceAll("\"", "");
-            String name           = jsonObject.get("name").toString().replaceAll("\"", "");
+            String id             = texto(jsonObject.get("id"));
+            String name           = texto(jsonObject.get("name"));
             String urlPicture     = urlPicture(jsonObject);
 
             Friend friend = new Friend();
@@ -43,11 +42,15 @@ public class FriendsDeserializer {
         return retorno;
     }
 
+    private String texto(JsonElement jsonElement) {
+        return jsonElement.toString().replaceAll("\"", "");
+    }
+
     private String urlPicture(JsonObject jsonObject) {
         try {
             JsonObject objPicture =  jsonObject.getAsJsonObject("picture");
             JsonObject objData    = objPicture.getAsJsonObject("data");
-            String urlPicture     = objData.get("url").toString().replaceAll("\"", "");
+            String urlPicture     = texto(objData.get("url"));
 
             return urlPicture;
 
