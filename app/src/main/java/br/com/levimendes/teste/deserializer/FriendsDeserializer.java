@@ -14,6 +14,7 @@ import br.com.levimendes.teste.bean.Friend;
  */
 public class FriendsDeserializer {
 
+    //comentario de teste levi mendes 02/09/2016
     public List<Friend> deserialize(String content) {
         Gson gson = new Gson();
         JsonElement jsonElementRoot = gson.fromJson(content, JsonElement.class);
