@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+
 import java.util.ArrayList;
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
@@ -77,6 +79,7 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
 
     @Override
     public void finalizar() {
+        LoginManager.getInstance().logOut();
         finish();
     }
 
@@ -108,10 +111,10 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         pbProcessamento.setVisibility(View.VISIBLE);
     }
 
-    @OnClick(R.id.fab)
-    void fab(View view) {
-        SnackUtil.showSnackShort(view, getString(R.string.adicionar_um_post_na_linha_do_tempo));
-    }
+//    @OnClick(R.id.fab)
+//    void fab(View view) {
+//        SnackUtil.showSnackShort(view, getString(R.string.adicionar_um_post_na_linha_do_tempo));
+//    }
 
     @Override
     public void configurarDrawer() {

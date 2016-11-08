@@ -26,11 +26,10 @@ public class FriendsTaggaglePresenter implements FriendsTaggableMVP.Presenter {
     public void init() {
         mView.showProgress();
 
-        GraphRequest graphRequest = new GraphRequest(AccessToken.getCurrentAccessToken(),
-                TAGGABLE_FRIENDS, null, HttpMethod.GET, callback());
+        AccessToken token = AccessToken.getCurrentAccessToken();
 
+        GraphRequest graphRequest = new GraphRequest(token, TAGGABLE_FRIENDS, null, HttpMethod.GET, callback());
         graphRequest.executeAsync();
-        //graphRequest();
     }
 
     /*
