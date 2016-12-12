@@ -2,22 +2,23 @@ package br.com.levimendes.teste;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
+import java.util.List;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.presenter.MainPresenter;
-import br.com.levimendes.teste.mvp.contracts.MainActivityView;
+import br.com.levimendes.teste.mvp.contracts.MainActivityMVP;
 import br.com.levimendes.teste.util.BaseActivity;
-import br.com.levimendes.teste.util.SnackUtil;
-import br.com.levimendes.teste.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainActivityView {
+public class MainActivity extends BaseActivity implements MainActivityMVP.View {
 
     CallbackManager callbackManager;
     MainPresenter presenter;
@@ -44,25 +45,24 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     }
 
     @Override
-    public void launchTimelineActivity(ArrayList<Post> posts, AccessToken token) {
+    public void launchTimelineActivity(List<Post> posts, AccessToken token) {
         Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-        intent.putExtra("posts", posts);
+        intent.putExtra("posts", (ArrayList)posts);
         intent.putExtra("token", token);
         startActivity(intent);
     }
 
     @Override
-    public void showSnack(View view, int idMsg) {
-        SnackUtil.showSnackLong(getCurrentFocus(), getString(idMsg));
+    protected void onResume() {
+        super.onResume();
+        //Facebook login
+        Profile profile = Profile.getCurrentProfile();
+
+        if(profile != null){
+            Log.e("name",     profile.getFirstName());
+            Log.e("surname",  profile.getLastName());
+            Log.e("imageUrl", profile.getProfilePictureUri(200,200).toString());
+        }
     }
 
-    @Override
-    public void showToast(int idMsg) {
-        ToastUtil.showLong(this, getString(idMsg));
-    }
-
-    @Override
-    public void showToast(String msg) {
-        ToastUtil.showLong(this, msg);
-    }
 }
