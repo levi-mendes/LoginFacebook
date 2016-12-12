@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
-
 import java.util.ArrayList;
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
@@ -26,11 +25,8 @@ import br.com.levimendes.teste.bean.User;
 import br.com.levimendes.teste.mvp.presenter.TimelinePresenter;
 import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
 import br.com.levimendes.teste.util.BaseActivity;
-import br.com.levimendes.teste.util.SnackUtil;
-import br.com.levimendes.teste.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         NavigationView.OnNavigationItemSelectedListener {
@@ -111,11 +107,6 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         pbProcessamento.setVisibility(View.VISIBLE);
     }
 
-//    @OnClick(R.id.fab)
-//    void fab(View view) {
-//        SnackUtil.showSnackShort(view, getString(R.string.adicionar_um_post_na_linha_do_tempo));
-//    }
-
     @Override
     public void configurarDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,23 +154,6 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
     public boolean drawerIsOpen() {
         return drawer.isDrawerOpen(GravityCompat.START);
     }
-
-
-    @Override
-    public void showSnack(View view, int idMsg) {
-        SnackUtil.showSnackLong(getCurrentFocus(), getString(idMsg));
-    }
-
-    @Override
-    public void showToast(int idMsg) {
-        ToastUtil.showLong(this, getString(idMsg));
-    }
-
-    @Override
-    public void showToast(String msg) {
-        ToastUtil.showLong(this, msg);
-    }
-
 
     @Override
     public void backPressed() {

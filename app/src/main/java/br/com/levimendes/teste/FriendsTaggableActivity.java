@@ -1,23 +1,21 @@
 package br.com.levimendes.teste;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import java.util.List;
-
 import br.com.levimendes.teste.adapter.ListaFriendsAdapter;
 import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.mvp.contracts.FriendsTaggableMVP;
 import br.com.levimendes.teste.mvp.presenter.FriendsTaggaglePresenter;
+import br.com.levimendes.teste.util.BaseActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FriendsTaggableActivity extends AppCompatActivity implements FriendsTaggableMVP.View {
+public class FriendsTaggableActivity extends BaseActivity implements FriendsTaggableMVP.View {
 
     @BindView(R.id.pbProcessamento)
     ProgressBar pbProcessamento;

@@ -43,6 +43,7 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
 
             case R.id.itemAmigos:
                 mView.callTelaAmigos();
+                mView.closeDrawer();
                 break;
         }
     }
@@ -52,8 +53,6 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
         mView.configurarDrawer();
         mView.configurarRecyclerView();
         mView.preencherLista(mView.posts());
-
-        //printDados(mView.tokenAcesso());
     }
 
     private GraphRequest.GraphJSONObjectCallback callback() {

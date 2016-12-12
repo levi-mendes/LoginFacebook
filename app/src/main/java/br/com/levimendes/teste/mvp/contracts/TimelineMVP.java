@@ -10,7 +10,7 @@ import br.com.levimendes.teste.bean.User;
  */
 public interface TimelineMVP {
 
-    interface View extends BasicView {
+    interface View {
         boolean drawerIsOpen();
         void openDrawer();
         void closeDrawer();
