@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
@@ -25,6 +25,7 @@ import br.com.levimendes.teste.bean.User;
 import br.com.levimendes.teste.mvp.presenter.TimelinePresenter;
 import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
 import br.com.levimendes.teste.util.BaseActivity;
+import br.com.levimendes.teste.util.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -60,10 +61,7 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        presenter.menuNavigation(id);
+        presenter.menuNavigation(item.getItemId());
 
         return true;
     }
@@ -92,10 +90,11 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
 
         tvNome.setText(user.nome);
 
-        Glide.with(this)
+        Picasso.with(this)
              .load(user.urlPicture)
+             .transform(new CircleTransform())
              .into(imageView);
-    }//  Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
+    }
 
     @Override
     public void hideProcessamento() {
