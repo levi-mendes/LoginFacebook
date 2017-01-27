@@ -53,6 +53,7 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
         mView.configurarDrawer();
         mView.configurarRecyclerView();
         mView.preencherLista(mView.posts());
+        printDados(mView.tokenAcesso());
     }
 
     private GraphRequest.GraphJSONObjectCallback callback() {
