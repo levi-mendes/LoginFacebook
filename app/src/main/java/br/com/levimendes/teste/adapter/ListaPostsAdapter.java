@@ -1,11 +1,16 @@
 package br.com.levimendes.teste.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.Post;
@@ -36,8 +41,21 @@ public class ListaPostsAdapter extends RecyclerView.Adapter<ListaPostsAdapter.Vi
         Post post = mListaPosts.get(position);
 
         holder.etTitulo.setText(post.story);
-        holder.etData.setText(post.createdTime);
+        holder.etData.setText(formatarData(post.createdTime));
         holder.etMensagem.setText(post.message);
+    }
+
+    private String formatarData(String sDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        try {
+            Date date = sdf.parse(sDate);
+            return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
+
+        } catch (ParseException e) {
+            Log.e("formatarData", e.getMessage(), e);
+            return "";
+        }
     }
 
     @Override
