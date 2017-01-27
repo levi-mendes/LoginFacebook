@@ -12,6 +12,7 @@
     tools:context=".TimelineActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <!--android:foreground="?attr/selectableItemBackground"-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPosts"
         android:scrollbars="vertical"
@@ -19,7 +20,6 @@
         android:layout_height="match_parent"
         app:cardElevation="6dp"
         app:cardCornerRadius="2dp"
-        android:foreground="?attr/selectableItemBackground"
         />
 
     <ProgressBar
