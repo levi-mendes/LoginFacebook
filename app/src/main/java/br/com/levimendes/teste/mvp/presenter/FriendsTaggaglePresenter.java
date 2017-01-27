@@ -6,7 +6,7 @@ import com.facebook.HttpMethod;
 import java.util.List;
 import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.deserializer.FriendsDeserializer;
-import br.com.levimendes.teste.mvp.contracts.FriendsTaggableMVP;
+import br.com.levimendes.teste.mvp.view.FriendsTaggableMVP;
 
 /**
  * Created by 809778 on 11/07/2016.

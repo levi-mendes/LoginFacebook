@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import br.com.levimendes.teste.bean.Post;
-import br.com.levimendes.teste.mvp.contracts.MainActivityMVP;
+import br.com.levimendes.teste.mvp.view.MainActivityMVP;
 
 /**
  * Created by Levi on 16/04/2016.

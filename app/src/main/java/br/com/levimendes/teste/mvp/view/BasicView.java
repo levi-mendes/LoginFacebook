@@ -1,4 +1,4 @@
-package br.com.levimendes.teste.mvp.contracts;
+package br.com.levimendes.teste.mvp.view;
 
 import android.support.annotation.StringRes;
 import android.view.View;

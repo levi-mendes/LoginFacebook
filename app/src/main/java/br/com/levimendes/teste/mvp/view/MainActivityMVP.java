@@ -1,4 +1,4 @@
-package br.com.levimendes.teste.mvp.contracts;
+package br.com.levimendes.teste.mvp.view;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;

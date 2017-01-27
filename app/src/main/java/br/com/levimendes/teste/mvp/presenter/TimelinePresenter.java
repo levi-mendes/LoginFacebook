@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.User;
-import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
+import br.com.levimendes.teste.mvp.view.TimelineMVP;
 
 /**
  * Created by Levi on 17/04/2016.

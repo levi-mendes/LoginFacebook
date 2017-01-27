@@ -3,7 +3,6 @@ package br.com.levimendes.teste.activities;
 import android.os.Bundle;
 
 import br.com.levimendes.teste.R;
-import br.com.levimendes.teste.util.BaseActivity;
 
 public class ProfileActivity extends BaseActivity {
 

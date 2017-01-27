@@ -1,4 +1,4 @@
-package br.com.levimendes.teste;
+package br.com.levimendes.teste.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +19,13 @@ import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+
+import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.adapter.ListaPostsAdapter;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.bean.User;
 import br.com.levimendes.teste.mvp.presenter.TimelinePresenter;
-import br.com.levimendes.teste.mvp.contracts.TimelineMVP;
-import br.com.levimendes.teste.util.BaseActivity;
+import br.com.levimendes.teste.mvp.view.TimelineMVP;
 import br.com.levimendes.teste.util.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;

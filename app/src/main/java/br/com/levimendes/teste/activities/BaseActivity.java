@@ -1,8 +1,8 @@
-package br.com.levimendes.teste.util;
+package br.com.levimendes.teste.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import br.com.levimendes.teste.mvp.contracts.BasicView;
+import br.com.levimendes.teste.mvp.view.BasicView;
 import static br.com.levimendes.teste.util.SnackUtil.showSnackLong;
 import static br.com.levimendes.teste.util.ToastUtil.showLong;
 

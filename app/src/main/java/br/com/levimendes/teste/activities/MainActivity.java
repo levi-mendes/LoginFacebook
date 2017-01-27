@@ -1,4 +1,4 @@
-package br.com.levimendes.teste;
+package br.com.levimendes.teste.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,11 @@ import com.facebook.Profile;
 import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.levimendes.teste.R;
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.presenter.MainPresenter;
-import br.com.levimendes.teste.mvp.contracts.MainActivityMVP;
-import br.com.levimendes.teste.util.BaseActivity;
+import br.com.levimendes.teste.mvp.view.MainActivityMVP;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
