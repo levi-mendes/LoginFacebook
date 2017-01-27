@@ -20,23 +20,20 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            tools:replace="android:theme"
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            tools:replace="android:theme" />
 
-        <activity
-            android:name=".TimelineActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".FriendsTaggableActivity" />
+        <activity android:name=".TimelineActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FriendsTaggableActivity" />
+        <activity android:name=".activities.ProfileActivity" />
 
     </application>
 
