@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
+import com.squareup.picasso.Picasso;
 import java.util.List;
 import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.R;
@@ -48,9 +46,9 @@ public class ListaFriendsAdapter extends RecyclerView.Adapter<ListaFriendsAdapte
         holder.tvName.setText(friend.name);
         holder.itemView.setOnClickListener(v -> ToastUtil.showLong(context, "Name: " + friend.name));
 
-        Glide.with(context)
+        Picasso.with(context)
               .load(friend.urlPicture)
-              .transform(new CircleTransform(context))
+              .transform(new CircleTransform())
               .into(holder.ivPicture);
     }
 
