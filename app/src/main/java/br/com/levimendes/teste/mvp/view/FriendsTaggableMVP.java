@@ -10,12 +10,17 @@ import br.com.levimendes.teste.bean.Friend;
 public interface FriendsTaggableMVP {
 
     interface View {
+
         void showProgress();
+
         void hideProgress();
+
         void carregarLista(List<Friend> friends);
+
     }
 
     interface Presenter {
+
         void init();
     }
 }

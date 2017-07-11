@@ -17,7 +17,6 @@ import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.presenter.MainPresenter;
 import br.com.levimendes.teste.mvp.view.MainActivityMVP;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainActivityMVP.View {
 
@@ -29,14 +28,17 @@ public class MainActivity extends BaseActivity implements MainActivityMVP.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         callbackManager = CallbackManager.Factory.create();
         presenter = new MainPresenter(this);
 
         // Callback registration
         loginButton.registerCallback(callbackManager, presenter.facebookCallbackLogin());
+    }
+
+    @Override
+    public int layout() {
+        return R.layout.activity_main;
     }
 
     @Override

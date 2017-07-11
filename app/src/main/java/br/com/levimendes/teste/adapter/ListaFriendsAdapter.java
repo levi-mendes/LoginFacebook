@@ -30,9 +30,8 @@ public class ListaFriendsAdapter extends RecyclerView.Adapter<ListaFriendsAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend, parent, false);
-        ViewHolder vh = new ViewHolder(v);
 
-        return vh;
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

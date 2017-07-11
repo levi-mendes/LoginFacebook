@@ -14,7 +14,6 @@ import br.com.levimendes.teste.bean.Friend;
 import br.com.levimendes.teste.mvp.view.FriendsTaggableMVP;
 import br.com.levimendes.teste.mvp.presenter.FriendsTaggaglePresenter;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class FriendsTaggableActivity extends BaseActivity implements FriendsTaggableMVP.View {
 
@@ -28,13 +27,16 @@ public class FriendsTaggableActivity extends BaseActivity implements FriendsTagg
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_taggable);
-        ButterKnife.bind(this);
 
         configurarRecyclerView();
 
         presenter = new FriendsTaggaglePresenter(this);
         presenter.init();
+    }
+
+    @Override
+    public int layout() {
+        return R.layout.activity_friends_taggable;
     }
 
     private void configurarRecyclerView() {

@@ -28,7 +28,6 @@ import br.com.levimendes.teste.mvp.presenter.TimelinePresenter;
 import br.com.levimendes.teste.mvp.view.TimelineMVP;
 import br.com.levimendes.teste.util.CircleTransform;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
         NavigationView.OnNavigationItemSelectedListener {
@@ -49,14 +48,17 @@ public class TimelineActivity extends BaseActivity implements TimelineMVP.View,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
-        ButterKnife.bind(this);
 
         nav_view.setNavigationItemSelectedListener(this);
 
         setSupportActionBar(toolbar);
         presenter = new TimelinePresenter(this);
         presenter.init();
+    }
+
+    @Override
+    public int layout() {
+        return R.layout.activity_timeline;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

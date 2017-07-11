@@ -15,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
-
 import br.com.levimendes.teste.bean.Post;
 import br.com.levimendes.teste.mvp.view.MainActivityMVP;
 

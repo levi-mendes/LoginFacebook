@@ -17,19 +17,19 @@ public class FriendsDeserializer {
     //comentario de teste levi mendes 02/09/2016
     public List<Friend> deserialize(String content) {
         Gson gson = new Gson();
-        JsonElement jsonElementRoot = gson.fromJson(content, JsonElement.class);
+        JsonElement jeRoot = gson.fromJson(content, JsonElement.class);
         List<Friend> retorno = new ArrayList<>();
 
-        JsonObject root = jsonElementRoot.getAsJsonObject();
+        JsonObject root = jeRoot.getAsJsonObject();
         JsonArray array = root.getAsJsonArray("data");
 
         for (int cont = 0; cont < array.size(); cont++) {
-            JsonElement jsonElement = array.get(cont);
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonElement je = array.get(cont);
+            JsonObject jo = je.getAsJsonObject();
 
-            String id             = texto(jsonObject.get("id"));
-            String name           = texto(jsonObject.get("name"));
-            String urlPicture     = urlPicture(jsonObject);
+            String id             = texto(jo.get("id"));
+            String name           = texto(jo.get("name"));
+            String urlPicture     = urlPicture(jo);
 
             Friend friend = new Friend();
 
@@ -43,13 +43,13 @@ public class FriendsDeserializer {
         return retorno;
     }
 
-    private String texto(JsonElement jsonElement) {
-        return jsonElement.toString().replaceAll("\"", "");
+    private String texto(JsonElement je) {
+        return je.toString().replaceAll("\"", "");
     }
 
-    private String urlPicture(JsonObject jsonObject) {
+    private String urlPicture(JsonObject jo) {
         try {
-            JsonObject objPicture =  jsonObject.getAsJsonObject("picture");
+            JsonObject objPicture =  jo.getAsJsonObject("picture");
             JsonObject objData    = objPicture.getAsJsonObject("data");
             String urlPicture     = texto(objData.get("url"));
 
