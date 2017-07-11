@@ -71,7 +71,6 @@ public class TimelinePresenter implements TimelineMVP.Presenter {
         parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location"); // Parámetros que pedimos a facebook
         request.setParameters(parameters);
         request.executeAsync();
-
     }
 
     private String urlPicture(String id) {

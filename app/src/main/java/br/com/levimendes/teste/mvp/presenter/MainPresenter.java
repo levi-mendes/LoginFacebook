@@ -68,7 +68,9 @@ public class MainPresenter implements MainActivityMVP.Presenter {
             }
 
             @Override
-            public void onCancel() {}
+            public void onCancel() {
+                Log.e("MainPresenter", "onCancel");
+            }
 
             @Override
             public void onError(FacebookException exception) {
